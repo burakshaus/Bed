@@ -1,6 +1,6 @@
-# Xed 📝
+# Bed 📝
 
-**Xed** is a lightweight, distraction-free text editor built from scratch using **Java Swing**. 
+**Bed** is a lightweight, distraction-free text editor built from scratch using **Java Swing**. 
 
 It is designed to be a simple, fast, and cross-platform tool for editing text files. This project serves as a foundational implementation of a desktop GUI application, with plans to evolve into a more advanced C++ version in the future.
 
