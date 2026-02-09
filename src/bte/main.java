@@ -14,8 +14,8 @@ public class main extends JFrame implements ActionListener {
     JMenuItem newItem, openItem, saveItem, saveAsItem, exitItem;
     JFileChooser fileChooser;
 
-    Font uiFont = new Font("Segoe UI", Font.PLAIN, 18);
-    Font editorFont = new Font("Monospaced", Font.PLAIN, 18);
+    Font uiFont = new Font("Segoe UI", Font.PLAIN, 25);
+    Font editorFont = new Font("Monospaced", Font.PLAIN, 25);
 
     public main() {
         setupUI();
@@ -67,13 +67,11 @@ public class main extends JFrame implements ActionListener {
         saveAsItem.setFont(uiFont);
         saveAsItem.setAccelerator(
                 KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK));
-        saveAsItem.addActionListener(this); // Save As için de listener ekledim
-
+        saveAsItem.addActionListener(this); 
         exitItem = new JMenuItem("Quit");
         exitItem.setFont(uiFont);
         exitItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_DOWN_MASK));
-        exitItem.addActionListener(this); // Lambda yerine "this" kullandım ki actionPerformed'da yönetebilelim
-
+        exitItem.addActionListener(this); 
         fileMenu.add(newItem);
         fileMenu.add(openItem);
         fileMenu.add(saveItem);
@@ -81,7 +79,6 @@ public class main extends JFrame implements ActionListener {
         fileMenu.addSeparator();
         fileMenu.add(exitItem);
 
-        // --- EDIT MENU ---
         editMenu = new JMenu("Edit");
         editMenu.setFont(uiFont);
         editMenu.setMnemonic(KeyEvent.VK_E);
@@ -118,7 +115,6 @@ public class main extends JFrame implements ActionListener {
         editMenu.addSeparator();
         editMenu.add(selectAllItem);
 
-        // --- VIEW MENU ---
         viewMenu = new JMenu("View");
         viewMenu.setFont(uiFont);
 
@@ -141,7 +137,6 @@ public class main extends JFrame implements ActionListener {
         if (file.exists()) {
             try {
                 BufferedReader br = new BufferedReader(new FileReader(file));
-                // PERFORMANS DÜZELTMESİ: Döngü yerine tek komut
                 textArea.read(br, null);
                 br.close();
                 this.setTitle("Bed - " + file.getName());
