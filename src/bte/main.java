@@ -10,33 +10,33 @@ public class main extends JFrame implements ActionListener {
     JTextArea textArea;
     JScrollPane scrollPane;
     JMenuBar menuBar;
-    JMenu fileMenu, editMenu, viewMenu; 
-    JMenuItem newItem, openItem, saveItem, saveAsItem, exitItem; 
+    JMenu fileMenu, editMenu, viewMenu;
+    JMenuItem newItem, openItem, saveItem, saveAsItem, exitItem;
     JFileChooser fileChooser;
 
-    Font uiFont = new Font("Segoe UI", Font.PLAIN, 14); 
-    Font editorFont = new Font("Monospaced", Font.PLAIN, 18); 
+    Font uiFont = new Font("Segoe UI", Font.PLAIN, 18);
+    Font editorFont = new Font("Monospaced", Font.PLAIN, 18);
 
     public main() {
         setupUI();
     }
-    
+
     private void setupUI() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Bed - Untitled");
-        this.setSize(1000, 700); 
+        this.setSize(1000, 700);
         this.setLocationRelativeTo(null);
 
         textArea = new JTextArea();
-        textArea.setFont(editorFont); 
-        
+        textArea.setFont(editorFont);
+
         scrollPane = new JScrollPane(textArea);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         this.add(scrollPane, BorderLayout.CENTER);
-        
+
         createMenuBar();
         this.setJMenuBar(menuBar);
-        
+
         fileChooser = new JFileChooser(".");
         this.setVisible(true);
     }
@@ -48,7 +48,6 @@ public class main extends JFrame implements ActionListener {
         fileMenu.setFont(uiFont);
         fileMenu.setMnemonic(KeyEvent.VK_F);
 
-        
         newItem = new JMenuItem("New");
         newItem.setFont(uiFont);
         newItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK));
@@ -66,7 +65,8 @@ public class main extends JFrame implements ActionListener {
 
         saveAsItem = new JMenuItem("Save As...");
         saveAsItem.setFont(uiFont);
-        saveAsItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK));
+        saveAsItem.setAccelerator(
+                KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK));
         saveAsItem.addActionListener(this); // Save As için de listener ekledim
 
         exitItem = new JMenuItem("Quit");
@@ -98,7 +98,7 @@ public class main extends JFrame implements ActionListener {
         JMenuItem copyItem = new JMenuItem("Copy");
         copyItem.setFont(uiFont);
         copyItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_DOWN_MASK));
-        copyItem.addActionListener(e -> textArea.copy()); 
+        copyItem.addActionListener(e -> textArea.copy());
 
         JMenuItem pasteItem = new JMenuItem("Paste");
         pasteItem.setFont(uiFont);
@@ -121,7 +121,7 @@ public class main extends JFrame implements ActionListener {
         // --- VIEW MENU ---
         viewMenu = new JMenu("View");
         viewMenu.setFont(uiFont);
-        
+
         JCheckBoxMenuItem wordWrapItem = new JCheckBoxMenuItem("Word Wrap");
         wordWrapItem.setFont(uiFont);
         wordWrapItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, InputEvent.CTRL_DOWN_MASK));
@@ -150,7 +150,7 @@ public class main extends JFrame implements ActionListener {
             }
         }
     }
-    
+
     public void saveFile(String path) {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(path));
@@ -169,23 +169,19 @@ public class main extends JFrame implements ActionListener {
             if (response == JFileChooser.APPROVE_OPTION) {
                 openFile(fileChooser.getSelectedFile().getAbsolutePath());
             }
-        } 
-        else if (e.getSource() == saveItem) {
+        } else if (e.getSource() == saveItem) {
             int response = fileChooser.showSaveDialog(null);
             if (response == JFileChooser.APPROVE_OPTION) {
                 saveFile(fileChooser.getSelectedFile().getAbsolutePath());
             }
-        }
-        else if (e.getSource() == saveAsItem) {
+        } else if (e.getSource() == saveAsItem) {
             int response = fileChooser.showSaveDialog(null);
             if (response == JFileChooser.APPROVE_OPTION) {
                 saveFile(fileChooser.getSelectedFile().getAbsolutePath());
             }
-        }
-        else if (e.getSource() == exitItem) {
+        } else if (e.getSource() == exitItem) {
             System.exit(0);
-        }
-        else if (e.getSource() == newItem) {
+        } else if (e.getSource() == newItem) {
             textArea.setText("");
             this.setTitle("Bed - Untitled");
         }
@@ -194,7 +190,7 @@ public class main extends JFrame implements ActionListener {
     public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            
+
             setUIFont(new javax.swing.plaf.FontUIResource("Segoe UI", Font.PLAIN, 20));
 
         } catch (Exception e) {
